@@ -6,6 +6,9 @@
 app = 'leave-management-system--dcd'
 primary_region = 'sin'
 
+[env]
+  TZ = "Asia/Colombo"
+
 [build]
 
 [http_service]
