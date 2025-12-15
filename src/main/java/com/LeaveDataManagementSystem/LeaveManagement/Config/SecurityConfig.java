@@ -2,6 +2,7 @@ package com.LeaveDataManagementSystem.LeaveManagement.Config;
 
 import com.LeaveDataManagementSystem.LeaveManagement.Service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -24,16 +25,8 @@ import java.util.List;
 
 
 @Configuration
-    
-@Value("${app.base-url}")
-private String baseUrl;
-
-@Value("${app.frontend-url}")
-private String frontendUrl;
-
 @EnableMethodSecurity
 public class SecurityConfig {
-
 
     @Autowired
     private JwtAuthFilter jwtAuthFilter;
@@ -41,6 +34,11 @@ public class SecurityConfig {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    @Value("${app.base-url}")
+    private String baseUrl;
+
+    @Value("${app.frontend-url}")
+    private String frontendUrl;
 
 
     @Bean
@@ -68,12 +66,12 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOriginPatterns(List.of(
-        "http://localhost:5173",
-        "http://localhost:3000",
-        baseUrl,
-        frontendUrl,
-        "https://*.netlify.app"
-    ));
+            "http://localhost:5173",
+            "http://localhost:3000",
+            baseUrl,
+            frontendUrl,
+            "https://*.netlify.app"
+        ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
@@ -83,6 +81,7 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -101,6 +100,3 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
-
-
-
