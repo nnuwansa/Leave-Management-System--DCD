@@ -34,7 +34,7 @@ private String frontendUrl;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-private String frontendUrl;
+
     @Autowired
     private JwtAuthFilter jwtAuthFilter;
 
@@ -101,5 +101,6 @@ private String frontendUrl;
         return new BCryptPasswordEncoder();
     }
 }
+
 
 
