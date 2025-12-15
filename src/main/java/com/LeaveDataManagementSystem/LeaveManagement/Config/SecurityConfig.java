@@ -70,7 +70,7 @@ public class SecurityConfig {
             "http://localhost:3000",
             baseUrl,
             frontendUrl,
-            "https://*.netlify.app"
+            "https://cdcleave.netlify.app"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
@@ -100,3 +100,4 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
+
