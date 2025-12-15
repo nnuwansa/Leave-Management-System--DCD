@@ -24,9 +24,16 @@ import java.util.List;
 
 
 @Configuration
+    
+@Value("${app.base-url}")
+private String baseUrl;
+
+@Value("${app.frontend-url}")
+private String frontendUrl;
+
 @EnableMethodSecurity
 public class SecurityConfig {
-@Value("${app.base-url}")
+
 private String frontendUrl;
     @Autowired
     private JwtAuthFilter jwtAuthFilter;
@@ -60,8 +67,13 @@ private String frontendUrl;
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(List.of("http://localhost:5173",frontendUrl,
-    "https://*.netlify.app"));
+        configuration.setAllowedOriginPatterns(List.of(
+        "http://localhost:5173",
+        "http://localhost:3000",
+        baseUrl,
+        frontendUrl,
+        "https://*.netlify.app"
+    ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
@@ -89,4 +101,5 @@ private String frontendUrl;
         return new BCryptPasswordEncoder();
     }
 }
+
 
