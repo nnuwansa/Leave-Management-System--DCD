@@ -70,7 +70,7 @@ public class SecurityConfig {
             "http://localhost:3000",
             baseUrl,
             frontendUrl,
-            "https://cdcleave.netlify.app"
+            "https://leave-cdc.vercel.app/"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
@@ -100,4 +100,5 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
+
 
